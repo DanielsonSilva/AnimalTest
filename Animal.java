@@ -1,4 +1,4 @@
-import java.lang.Math;
+import java.lang.*;
 
 /**
  * Classe que representa o animal e suas características
@@ -89,7 +89,6 @@ class Animal {
       default:
         System.out.println("Espécie não aceita");
         return 0.;
-        break;
     }
     // retorna o quanto o animal cresceu em peso
     return cresceKg;
@@ -113,7 +112,8 @@ class Animal {
     // Como a conversão alimentar permite crescer até 1 quilo por dia (máximo), o resultado será
     //a diferença entre os pesos final e inicial. Como um dia parcial deve contar como
     //um dia completo, então o resultado será o próximo inteiro.
-    return intValue(Math.ceil(precisaCrescer));
+    double tempo = Math.ceil(precisaCrescer);
+    return (int) tempo;
   }
 
 }
