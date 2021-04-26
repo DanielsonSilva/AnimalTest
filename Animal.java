@@ -1,3 +1,4 @@
+import java.lang.Math;
 
 /**
  * Classe que representa o animal e suas características
@@ -64,8 +65,16 @@ class Animal {
   }
   */
 
+  /**
+   * Método que calcula quanto o animal vai engordar de acordo com os parâmetros
+   * @param especie A especie que deve ser tratada.
+   * @param quantidadeKgEngordar Quantidade de quilos de comida que deve ser administrada ao animal.
+   * @return Retorna o que seria o peso final do animal após a alimentação com a quantidade de comida entregue.
+   */
   public double engordar(int especie, double quantidadeKgEngordar) {
+    // iniciando a variável
     double cresceKg = 0;
+    // de acordo com a espécie o cálculo será diferente
     switch (especie) {
       case 1:
         cresceKg = quantidadeKgEngordar/2.9;
@@ -76,29 +85,35 @@ class Animal {
       case 3:
         cresceKg = quantidadeKgEngordar/1.5;
         break;
+      // Caso for inserido uma espécie não aceita, emite mensagem e retorno 0
       default:
         System.out.println("Espécie não aceita");
+        return 0.;
         break;
     }
+    // retorna o quanto o animal cresceu em peso
     return cresceKg;
   }
 
+  /**
+   * Método que calcula os dias para o abate do animal
+   * @param especie A espécie do animal.
+   * @param pesoAtual O peso atual do animal.
+   * @param pesoFinal O peso final de abate do animal.
+   * @return Quantidade de dias para que o animal chegue no peso final através da engorda para ser abatido.
+   */
   public int diasParaAbate(int especie, double pesoAtual, double pesoFinal) {
-    double precisaCrescer = pesoFinal - pesoAtual;
-    switch (especie) {
-      case 1:
-        cresceKg = quantidadeKgEngordar/2.9;
-        break;
-      case 2:
-        cresceKg = quantidadeKgEngordar/1.8;
-        break;
-      case 3:
-        cresceKg = quantidadeKgEngordar/1.5;
-        break;
-      default:
-        System.out.println("Espécie não aceita");
-        break;
+    // Não faz sentido o peso final ser menor que o peso atual
+    if (pesoFinal < pesoAtual) {
+      System.out.println("O animal não pode emagrecer para o abate");
+      return 0;
     }
+    // Quantidade de quilos que o animal precisa crescer
+    double precisaCrescer = pesoFinal - pesoAtual;
+    // Como a conversão alimentar permite crescer até 1 quilo por dia (máximo), o resultado será
+    //a diferença entre os pesos final e inicial. Como um dia parcial deve contar como
+    //um dia completo, então o resultado será o próximo inteiro.
+    return intValue(Math.ceil(precisaCrescer));
   }
 
 }

@@ -1,6 +1,11 @@
+import junit.framework.TestCase;
 
-class AnimalTest {
+/**
+ * Classe de teste da classe Animal
+ */
+class AnimalTest extends TestCase{
 
+  /** Propriedade do Animal para realização de testes */
   public Animal animal;
 
   public Animal engordar(int especie, double quantidadeKgEngordar) {
